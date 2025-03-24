@@ -13,7 +13,7 @@ import { signIn } from '@/ui/api/sign-in'
 import { useElectron } from '@/ui/hooks/useElectron'
 
 const signInForm = z.object({
-  email: z.string().nonempty('O campo precisa ser preenchido.').email({message: 'Formato de email inválido.'}),
+  email: z.string().nonempty('O campo precisa ser preenchido.').email('Formato de email inválido.'),
 })
 
 type SignInForm = z.infer<typeof signInForm>
@@ -72,16 +72,11 @@ export function SignIn() {
             </p>
           </div>
 
-          <form className="space-y-4" onSubmit={handleSubmit(handleSignIn)}>
+          <form className="space-y-4" onSubmit={handleSubmit(handleSignIn)} noValidate>
             <div className="space-y-2">
               <Label htmlFor="email">Seu Email</Label>
-              <Input id="email" type="email" 
-                {...register('email', { 
-                  required: 'O email é obrigatório', 
-                  validate: (value) => signInForm.safeParse({ email: value }).success || 'Formato de email inválido',
-                })}  
-              />
-              {errors.email && <p className='text-red-400'>{errors.email.message}</p>}
+              <Input id="email" type="email" {...register('email')}/> 
+              <p className='text-red-400'>{errors.email && errors.email.message}</p>
             </div>
             <Button type="submit" className="w-full" disabled={isSubmitting}>
               Acessar painel

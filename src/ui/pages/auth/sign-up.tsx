@@ -8,10 +8,11 @@ import { registerUser } from '@/ui/api/register'
 import { Button } from '@/ui/components/ui/button'
 import { Input } from '@/ui/components/ui/input'
 import { Label } from '@/ui/components/ui/label'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 const signUpForm = z.object({
-  name: z.string().min(1).max(32),
-  email: z.string().email(),
+  name: z.string().min(1, 'O campo nome deve ser preenchido.').max(32, 'O tamanho maximo do campo nome é 32 caracteres.'),
+  email: z.string().nonempty('O campo email precisa ser preenchido.').email('Formato de email inválido.'),
   imageUrl: z.string().url().optional(),
 })
 
@@ -23,8 +24,10 @@ export function SignUp() {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting },
-  } = useForm<SignUpForm>()
+    formState: { isSubmitting, errors },
+  } = useForm<SignUpForm>({
+    resolver: zodResolver(signUpForm)
+  })
 
   const { mutateAsync: registerUserFn } = useMutation({
     mutationFn: registerUser,
@@ -74,11 +77,13 @@ export function SignUp() {
                 type="text"
                 {...register('name')}
               />
+              <p className='text-red-400'>{errors.name && errors.name.message}</p>
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="email">Seu Email</Label>
-              <Input id="email" type="email" {...register('email')} />
+              <Input id="email" type="email" {...register('email')}/>
+              <p className='text-red-400'>{errors.email && errors.email.message}</p>
             </div>
 
             <Button type="submit" className="w-full" disabled={isSubmitting}>
