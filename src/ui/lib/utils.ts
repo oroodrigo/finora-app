@@ -10,7 +10,7 @@ export const SideBarItems = {
       id: 1,
       text: 'Visão Geral',
       icon: ChartNoAxesGantt,
-      path: '/sign-in'
+      path: '/'
     },
     {
       id: 2,
