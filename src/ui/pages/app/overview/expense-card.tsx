@@ -1,4 +1,4 @@
-import { ExpenseIcon } from "@/ui/components/icons/ExpenseIcon";
+import { ExpenseIcon } from "@/ui/components/icons/expense-icon";
 import { formatToCurrency } from "@/ui/lib/utils";
 import { ChevronDown } from "lucide-react";
 

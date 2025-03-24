@@ -1,12 +1,12 @@
 import { DatePicker } from "@/ui/components/date-picker";
-import { CashFlowChart } from "./CashFlowChart";
-import { ExpenseCard } from "./ExpenseCard";
-import { ExpenseOverviewChart } from "./ExpenseOverviewChart";
-import { InvestmentCard } from "./InvestmentCard";
-import { MostProfitableAssets } from "./MostProfitableAssets";
-import { RevenueCard } from "./RevenueCard";
-import { SavingCard } from "./SavingCard";
-import { SavingsProgress } from "./SavingsProgress";
+import { CashFlowChart } from "./cash-flow-chart";
+import { ExpenseCard } from "./expense-card";
+import { ExpenseOverviewChart } from "./expense-overview-chart";
+import { InvestmentCard } from "./investment-card";
+import { MostProfitableAssets } from "./most-profitable-assets";
+import { RevenueCard } from "./revenue-card";
+import { SavingCard } from "./saving-card";
+import { SavingsProgress } from "./savings-progress";
 
 export function Overview() {
   return (

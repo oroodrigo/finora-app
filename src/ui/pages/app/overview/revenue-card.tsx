@@ -1,4 +1,4 @@
-import { IncomeIcon } from "@/ui/components/icons/IncomeIcon";
+import { IncomeIcon } from "@/ui/components/icons/income-icon";
 import { formatToCurrency } from "@/ui/lib/utils";
 import { ChevronUp } from "lucide-react";
 

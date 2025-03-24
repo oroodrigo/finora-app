@@ -1,8 +1,8 @@
 import { clsx, type ClassValue } from "clsx"
 import { Blocks, ChartNoAxesGantt, Landmark, PiggyBank, Settings } from "lucide-react"
 import { twMerge } from "tailwind-merge"
-import { IncomeIcon } from "../components/icons/IncomeIcon"
-import { ExpenseIcon } from "../components/icons/ExpenseIcon"
+import { IncomeIcon } from "../components/icons/income-icon"
+import { ExpenseIcon } from "../components/icons/expense-icon"
 
 export const SideBarItems = {
   menu: [

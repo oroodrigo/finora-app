@@ -1,7 +1,7 @@
 import { DatePicker } from "@/ui/components/date-picker";
-import { RevenueDistributionChart } from "./RevenueDistributionChart";
-import { RevenueMonthComparisonChart } from "./RevenueMonthComparisonChart";
-import { RevenueProgressChart } from "./RevenueProgressChart";
+import { RevenueDistributionChart } from "./revenue-distribution-chart";
+import { RevenueMonthComparisonChart } from "./revenue-month-comparison-chart";
+import { RevenueProgressChart } from "./revenue-progress-chart";
 import { Button } from "@/ui/components/ui/button";
 import { PlusIcon } from "lucide-react";
 

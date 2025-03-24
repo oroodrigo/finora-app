@@ -25,7 +25,7 @@ export function Header() {
 
           <section>
             <strong className="text-lg text-text-100">{ isLoadingProfile ? 'Carregando...' : profile?.name}</strong>
-            <p className="text-sm text-text-500">Olá, bem vindo de volta!</p>
+            <p className="text-sm text-text-500">{ isLoadingProfile ? 'Carregando...' : profile?.email}</p>
           </section>
         </section>
 

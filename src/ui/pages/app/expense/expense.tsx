@@ -1,10 +1,10 @@
 import { DatePicker } from "@/ui/components/date-picker";
 import { Button } from "@/ui/components/ui/button";
 import { PlusIcon } from "lucide-react";
-import { RevenueMonthComparisonChart } from "../revenue/RevenueMonthComparisonChart";
-import { ExpenseProgressChart } from "./ExpenseProgressChart";
-import { HigherExpenses } from "./HigherExpenses";
-import { ExpensesDistributionChart } from "./ExpensesDistributionChart";
+import { RevenueMonthComparisonChart } from "../revenue/revenue-month-comparison-chart";
+import { ExpenseProgressChart } from "./expense-progress-chart";
+import { HigherExpenses } from "./higher-expenses";
+import { ExpensesDistributionChart } from "./expenses-distribution-chart";
 
 export function Expenses() {
   return (
