@@ -1,10 +1,9 @@
 import { DatePicker } from "@/ui/components/date-picker";
-import { Button } from "@/ui/components/ui/button";
-import { PlusIcon } from "lucide-react";
 import { ExpenseProgressChart } from "./expense-progress-chart";
 import { HigherExpenses } from "./higher-expenses";
 import { ExpensesDistributionChart } from "./expenses-distribution-chart";
 import { ExpenseMonthComparisonChart } from "./expense-month-comparison-chart";
+import { NewTransactionModal } from "@/ui/components/modals/new-transaction-modal";
 
 export function Expenses() {
   return (
@@ -12,10 +11,7 @@ export function Expenses() {
       <header className="flex items-center justify-between w-full">
         <h1 className="text-2xl font-bold text-text-200 tracking-tight">Atividades de Saída</h1>
         <section className="flex gap-4">
-            <Button>
-              Nova saída
-              <PlusIcon className="text-white"/>
-            </Button>
+            <NewTransactionModal/>
             <DatePicker/>
           </section>
       </header>
