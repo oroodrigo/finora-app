@@ -18,7 +18,7 @@ function createWindow() {
     icon,
     minWidth: 1400,
     minHeight: 800,
-    frame: true,
+    frame: false,
     webPreferences: {
       preload: getPreloadPath(),
     }
