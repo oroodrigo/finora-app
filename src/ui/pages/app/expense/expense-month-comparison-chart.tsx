@@ -34,7 +34,7 @@ const dataKeys = {
   xAxys: 'month',
 } satisfies DataKey<RevenueData>
 
-export function RevenueMonthComparisonChart() {
+export function ExpenseMonthComparisonChart() {
   return (
     <Card className="w-1/2 2xl:min-w-[600px] 2xl:w-3/5 h-80">
       <CardHeader>

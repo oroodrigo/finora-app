@@ -1,10 +1,10 @@
 import { DatePicker } from "@/ui/components/date-picker";
 import { Button } from "@/ui/components/ui/button";
 import { PlusIcon } from "lucide-react";
-import { RevenueMonthComparisonChart } from "../revenue/revenue-month-comparison-chart";
 import { ExpenseProgressChart } from "./expense-progress-chart";
 import { HigherExpenses } from "./higher-expenses";
 import { ExpensesDistributionChart } from "./expenses-distribution-chart";
+import { ExpenseMonthComparisonChart } from "./expense-month-comparison-chart";
 
 export function Expenses() {
   return (
@@ -26,7 +26,7 @@ export function Expenses() {
         </section>
 
         <section className="flex w-full gap-8">
-          <RevenueMonthComparisonChart/>
+          <ExpenseMonthComparisonChart/>
           <HigherExpenses/>
         </section>
       </section>
