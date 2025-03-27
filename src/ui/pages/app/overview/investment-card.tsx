@@ -10,8 +10,8 @@ export function InvestmentCard() {
       <div>
         <h3 className="text-base text-text-500">Investimentos</h3>
         <p className="text-lg">
-          {formatToCurrency(395400)}
-          <span className="text-accent-green/70"> +5%<ChevronUp className="inline"/></span>
+          {formatToCurrency(0)}
+          <span className="text-accent-green/70"> +0%<ChevronUp className="inline"/></span>
         </p>
       </div>
     </div>
