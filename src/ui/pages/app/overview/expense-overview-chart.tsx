@@ -1,11 +1,15 @@
+import { getExpenseDistributionInPeriod } from "@/ui/api/get-expense-distribution-in-period"
 import { ChartLegendItem } from "@/ui/components/chart/chart-legend-item"
 import { Button } from "@/ui/components/ui/button"
 import { Card, CardContent,CardHeader, CardTitle } from "@/ui/components/ui/card"
 import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/ui/components/ui/chart"
 import { Separator } from "@/ui/components/ui/separator"
 import { formatToCurrency } from "@/ui/lib/utils"
+import { useQuery } from "@tanstack/react-query"
+import { addDays } from "date-fns"
 import { MoveRight} from "lucide-react"
 import { useMemo } from "react"
+import { DateRange } from "react-day-picker"
 import { Link } from "react-router"
 import { Label, Pie, PieChart } from "recharts"
 
@@ -17,36 +21,39 @@ const COLORS = [
   "#2dd4bf",
 ]
 
-const chartData = [
-  { category: 'Lanche', amount: 213 },
-  { category: 'Transporte', amount: 234 },
-  { category: 'Mercado', amount: 525 },
-  { category: 'Faculdade', amount: 432 },
-  { category: 'Assinaturas', amount: 151 },
-].map((item, index) => ({
-  ...item,
-  fill: COLORS[index] // Garante que não ultrapasse o tamanho do array
-}));
-
 const chartConfig = {
   expenses: {
     label: "Saídas",
-  },
-  lanche: {
-    label: "lanche",
-    color: "#2dd4bf",
-  },
-  transporte: {
-    label: "transporte",
-    color: "#ea580c",
   }
 } satisfies ChartConfig
 
-export function ExpenseOverviewChart() {
-    const totalExpenseAmount = useMemo(() => {
+interface ExpenseOverviewChartProps {
+  dateRange: DateRange | undefined
+}
+
+export function ExpenseOverviewChart({ dateRange }: ExpenseOverviewChartProps) {
+  const { data: chartData = [] } = useQuery({
+    queryFn: () => 
+      getExpenseDistributionInPeriod({
+        from: dateRange?.from, 
+        to: dateRange?.to ? addDays(dateRange.to, 1) : undefined
+      }),
+    queryKey: ['metrics', 'expense-distribution', dateRange]
+  })
+
+
+  const totalExpenseAmount = useMemo(() => {
     return chartData.reduce((acc, curr) => acc + curr.amount, 0)
-  }, [])
-  
+  }, [chartData])
+
+  const chartDataWithColor = chartData.map((item, index) => {
+    return {
+      ...item,
+    fill: COLORS[index],
+    amountConverted: item.amount / 100,
+    }
+  })
+
 
   return (
     <Card className="2xl:min-w-[560px] w-1/2 2xl:w-2/5 h-80">
@@ -58,12 +65,12 @@ export function ExpenseOverviewChart() {
               Detalhes
               <MoveRight className="h-4"/>
             </Button>
-          </Link>
+        </Link>
         </div>
       </CardHeader>
 
       <CardContent className="flex flex-1 w-full items-center justify-center gap-20">
-        <ChartContainer
+          <ChartContainer
           config={chartConfig}
           className="mx-auto w-full aspect-square max-h-52 p-0 m-0"
         >
@@ -73,8 +80,8 @@ export function ExpenseOverviewChart() {
               content={<ChartTooltipContent hideLabel />}
             />
             <Pie
-              data={chartData}
-              dataKey="amount"
+              data={chartDataWithColor}
+              dataKey="amountConverted"
               nameKey="category"
               innerRadius={64}
               strokeWidth={5}
@@ -94,7 +101,7 @@ export function ExpenseOverviewChart() {
                           y={viewBox.cy}
                           className="fill-text-100 text-lg font-bold"
                         >
-                          {formatToCurrency(totalExpenseAmount * 100)}
+                          {formatToCurrency(totalExpenseAmount)}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
@@ -119,13 +126,13 @@ export function ExpenseOverviewChart() {
 
               if (index < chartData.length - 1) {
                 return (
-                  <div key={item.category}>
-                    <ChartLegendItem  color={item.fill} category={item.category} percentage={percentage} />
+                  <div key={item.categoryId}>
+                    <ChartLegendItem  color={COLORS[index]} category={item.category} percentage={percentage} />
                     <Separator className="border-dashed border-t-2 border-background-900"/>
                   </div>
                 )
               } else {
-                return <ChartLegendItem key={item.category} color={item.fill} category={item.category} percentage={percentage} />
+                return <ChartLegendItem key={item.categoryId} color={COLORS[index]} category={item.category} percentage={percentage} />
               }
             })}
           </ul>

@@ -35,7 +35,7 @@ export function Overview() {
           <section className="flex flex-col w-full h-full gap-8">
             <section className="flex w-full gap-8">
               <MostProfitableAssets/>
-              <ExpenseOverviewChart/>
+              <ExpenseOverviewChart dateRange={date}/>
             </section>
             <section className="flex w-full gap-8">
               <SavingsProgress/>
