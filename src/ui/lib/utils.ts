@@ -3,6 +3,8 @@ import { Blocks, ChartNoAxesGantt, Landmark, PiggyBank, Settings } from "lucide-
 import { twMerge } from "tailwind-merge"
 import { IncomeIcon } from "../components/icons/income-icon"
 import { ExpenseIcon } from "../components/icons/expense-icon"
+import { format } from "date-fns"
+import { ptBR } from "date-fns/locale"
 
 export const SideBarItems = {
   menu: [
@@ -66,4 +68,11 @@ export function formatToCurrency(amount: number | string) {
     style: 'currency'
   })
   .format(amountConverted / 100)
+}
+
+export function formatDateName(date: Date, formatStr: string, end?: number) {
+  const formattedName = format(date, formatStr , { locale: ptBR })
+  const firstLetterCapitalized = formattedName.substring(0,1).toLocaleUpperCase()
+
+  return firstLetterCapitalized + formattedName.substring(1, end)
 }

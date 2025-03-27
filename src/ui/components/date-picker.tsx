@@ -1,8 +1,7 @@
 import * as React from "react"
-import { addMonths, format } from "date-fns"
 import { CalendarIcon } from "lucide-react"
 
-import { cn } from "@/ui/lib/utils"
+import { cn, formatDateName } from "@/ui/lib/utils"
 import { Button } from "@/ui/components/ui/button"
 import { Calendar } from "@/ui/components/ui/calendar"
 import {
@@ -13,20 +12,16 @@ import {
 import { DateRange } from "react-day-picker"
 import { ptBR } from 'date-fns/locale'
 
+export interface DateRangePickerProps extends React.ComponentProps<'div'> {
+  date: DateRange | undefined
+  onDateChange: (date: DateRange | undefined) => void
+}
+
 export function DatePicker({
   className,
-}: React.HTMLAttributes<HTMLDivElement>) {
-  const [date, setDate] = React.useState<DateRange | undefined>({
-    from: new Date(new Date().setDate(1)),
-    to: addMonths(new Date().setDate(1), 1),
-  })
-
-  function formatDateName(date: Date, formatStr: string, end?: number) {
-    const formattedName = format(date, formatStr , { locale: ptBR })
-    const firstLetterCapitalized = formattedName.substring(0,1).toLocaleUpperCase()
-
-    return firstLetterCapitalized + formattedName.substring(1, end)
-  }
+  date,
+  onDateChange
+}: DateRangePickerProps) {
 
   return (
     <div className={cn("grid gap-2", className)}>
@@ -60,7 +55,7 @@ export function DatePicker({
             mode="range"
             defaultMonth={date?.from}
             selected={date}
-            onSelect={setDate}
+            onSelect={onDateChange}
             numberOfMonths={2}
             locale={ptBR}
             formatters={{

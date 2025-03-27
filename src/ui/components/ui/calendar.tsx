@@ -55,7 +55,7 @@ function Calendar({
           "day-outside text-zinc-400 aria-selected:bg-zinc-800/50 aria-selected:text-zinc-400",
         day_disabled: "text-zinc-400 opacity-50",
         day_range_middle:
-          "aria-selected:bg-zinc-800 aria-selected:text-zinc-100",
+          "aria-selected:bg-zinc-800 aria-selected:text-zinc-50",
         day_hidden: "invisible",
         ...classNames,
       }}
