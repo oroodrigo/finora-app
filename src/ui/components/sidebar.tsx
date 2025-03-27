@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router";
 import { Separator } from "./ui/separator";
 import { useElectron } from "../hooks/useElectron";
 import { queryClient } from "../lib/react-query";
+import AppLogo from "@/../desktopIcon.png"
 
 export function SideBar() {
   const { pathname: path } = useLocation()
@@ -20,9 +21,13 @@ export function SideBar() {
 
   return (
     <div className="flex flex-col justify-between border-background-600 border-0 border-t-0 h-full min-w-64 p-3 pt-0 select-none text-base">
-      <section className="flex flex-col items-center justify-center min-h-32 border-background-600">
-        <h1 className="text-4xl font-bold">Finora</h1>
-        <h2 className="text-sm font-normal text-text-500">Dashboard Financeiro</h2>
+      <section className="flex items-center min-h-32 gap-4 border-background-600">
+        <img src={AppLogo} alt="App Logo" className="h-12 ml-4"/>
+
+        <div className="text-start flex-1">
+          <h1 className="text-2xl font-bold">Finora</h1>
+          <h2 className="text-sm font-medium tracking-wide text-text-500">Dashboard Financeiro</h2>
+        </div>
       </section>
       <nav className="flex-1 p-3">
         <h2 className="text-text-500 font-medium">Menu</h2>
